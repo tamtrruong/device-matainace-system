@@ -8,19 +8,37 @@ import DashboardTechnician from "./DashboardTechnician";
 
 export default function DashboardPage() {
   const { user } = useAuth();
-  if (["ROLE_ADMIN", "ROLE_MANAGER"].includes(user?.role)) {
-    return <DashboardAdmin />;
-  }
-  if (user?.role === "ROLE_TECHNICIAN") {
-    return <DashboardTechnician />;
-  }
 
+  // State quản lý giao diện
+  const [isLightMode, setIsLightMode] = useState(false);
   const [extra, setExtra] = useState({
     devices: 0,
     schedules: 0,
     incidents: 0,
   });
   const [error, setError] = useState("");
+
+  // Kiểm tra trạng thái theme khi load trang
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("app-theme");
+    if (savedTheme === "light") {
+      setIsLightMode(true);
+      document.body.classList.add("light-theme");
+    }
+  }, []);
+
+  // Hàm chuyển đổi giao diện
+  const toggleTheme = () => {
+    if (isLightMode) {
+      document.body.classList.remove("light-theme");
+      localStorage.setItem("app-theme", "dark");
+      setIsLightMode(false);
+    } else {
+      document.body.classList.add("light-theme");
+      localStorage.setItem("app-theme", "light");
+      setIsLightMode(true);
+    }
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -48,8 +66,54 @@ export default function DashboardPage() {
     load();
   }, []);
 
+  if (["ROLE_ADMIN", "ROLE_MANAGER"].includes(user?.role)) {
+    return (
+      <>
+        {/* Nút đổi theme cho Admin/Manager có thể đặt ở topbar chung, nhưng nếu đặt ở đây: */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            paddingBottom: "10px",
+          }}
+        >
+          <button className="ghost-btn" onClick={toggleTheme}>
+            {isLightMode ? "🌙 Chế độ Tối" : "☀️ Chế độ Sáng"}
+          </button>
+        </div>
+        <DashboardAdmin />
+      </>
+    );
+  }
+
+  if (user?.role === "ROLE_TECHNICIAN") {
+    return (
+      <>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            paddingBottom: "10px",
+          }}
+        >
+          <button className="ghost-btn" onClick={toggleTheme}>
+            {isLightMode ? "🌙 Chế độ Tối" : "☀️ Chế độ Sáng"}
+          </button>
+        </div>
+        <DashboardTechnician />
+      </>
+    );
+  }
+
   return (
     <div className="page-grid">
+      {/* Nút đổi giao diện cho User */}
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <button className="ghost-btn" onClick={toggleTheme}>
+          {isLightMode ? "🌙 Chế độ Tối" : "☀️ Chế độ Sáng"}
+        </button>
+      </div>
+
       <PageHeader
         title="Không gian theo dõi cá nhân"
         subtitle="Xem nhanh tình trạng thiết bị và các yêu cầu hỗ trợ có liên quan đến bạn."

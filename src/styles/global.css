@@ -127,3 +127,152 @@ select option { color: #111827; background: #ffffff; }
   .forum-layout { grid-template-columns: 1fr; }
   .two-inputs { grid-template-columns: 1fr; }
 }
+
+body.light-theme {
+  color: #1e293b;
+  background:
+    radial-gradient(circle at top left, rgba(92, 117, 255, 0.08), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(49, 197, 255, 0.05), transparent 24%),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+}
+
+/* Các Card (Glassmorphism sáng) */
+body.light-theme .glass-card,
+body.light-theme .stat-card,
+body.light-theme .page-header,
+body.light-theme .profile-card,
+body.light-theme .forum-list,
+body.light-theme .forum-thread,
+body.light-theme .modal,
+body.light-theme .login-card,
+body.light-theme .filters {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #3b82f6; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* Chữ nhạt / Secondary Text */
+body.light-theme .eyebrow, 
+body.light-theme .tiny-label,
+body.light-theme .stat-label,
+body.light-theme th { 
+  color: #64748b; 
+}
+body.light-theme .muted,
+body.light-theme .forum-meta,
+body.light-theme .sidebar-footer { 
+  color: #475569; 
+}
+body.light-theme .forum-content {
+  color: #334155;
+}
+
+/* Navigation & Sidebar */
+body.light-theme .nav-link { 
+  color: #475569; 
+}
+body.light-theme .nav-link:hover, 
+body.light-theme .nav-link.active { 
+  background: rgba(59, 130, 246, 0.1); 
+  border: 1px solid rgba(59, 130, 246, 0.15); 
+  color: #2563eb; 
+  font-weight: 500;
+}
+
+/* Panel, Post Card, Comment, Badges Mặc định */
+body.light-theme .profile-panel, 
+body.light-theme .forum-post-card, 
+body.light-theme .forum-comment-card, 
+body.light-theme .login-kicker, 
+body.light-theme .badge-default { 
+  background: rgba(0, 0, 0, 0.03); 
+  border: 1px solid rgba(0, 0, 0, 0.06); 
+  color: #334155; 
+}
+body.light-theme .forum-post-card.active {
+  border-color: rgba(59, 130, 246, 0.4); 
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.1) inset;
+  background: white;
+}
+
+/* Inputs & Forms */
+body.light-theme input, 
+body.light-theme select, 
+body.light-theme textarea {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+}
+body.light-theme input::placeholder, 
+body.light-theme textarea::placeholder { 
+  color: #94a3b8; 
+}
+body.light-theme input:focus, 
+body.light-theme select:focus, 
+body.light-theme textarea:focus { 
+  border-color: #3b82f6; 
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); 
+}
+body.light-theme .inline-checkbox-row {
+  color: #334155;
+}
+
+/* Buttons */
+body.light-theme .ghost-btn { 
+  color: #334155; 
+  background: rgba(0, 0, 0, 0.04); 
+  border: 1px solid rgba(0, 0, 0, 0.08); 
+}
+body.light-theme .ghost-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Table */
+body.light-theme th, 
+body.light-theme td { 
+  border-bottom: 1px solid #e2e8f0; 
+}
+body.light-theme .empty-cell { 
+  color: #94a3b8; 
+}
+
+/* Thumbs & Previews */
+body.light-theme .device-thumb,
+body.light-theme .device-form-preview,
+body.light-theme .avatar-preview {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+/* Modal Backdrop */
+body.light-theme .modal-backdrop {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.glass-card, 
+.stat-card, 
+.profile-card, 
+.forum-post-card, 
+.login-card {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  will-change: transform; /* Tối ưu hiệu năng render */
+}
+
+.glass-card:hover, 
+.stat-card:hover, 
+.profile-card:hover, 
+.forum-post-card:hover, 
+.login-card:hover {
+  transform: translateY(-8px); 
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4); 
+}
+
+body.light-theme .glass-card:hover,
+body.light-theme .stat-card:hover,
+body.light-theme .profile-card:hover,
+body.light-theme .forum-post-card:hover,
+body.light-theme .login-card:hover {
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.12); 
+  border-color: rgba(59, 130, 246, 0.6); /* Nhấn viền xanh đậm hơn một chút khi hover */
+}
